@@ -8,5 +8,10 @@ namespace GeneticDrift
         {
 
         }
+
+        static void Output(int[] output)
+        {
+            Console.WriteLine($"Output: {output}");
+        }
     }
 }
