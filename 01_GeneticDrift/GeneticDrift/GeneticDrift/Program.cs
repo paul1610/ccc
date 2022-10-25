@@ -29,16 +29,19 @@ namespace GeneticDrift
 
         static int[] Sort(int[] arr)
         {
-            int temp;
+            int temp, temp1;
             for (int i = 0; i < arr.Length; i += 2)
             {
                 for (int j = 0; j < arr.Length; j += 2)
                 {
-                    if (arr[j] <= arr[i])
+                    if (arr[j] >= arr[i])
                     {
                         temp = arr[j];
-                        arr[j] = arr[i];
-                        arr[i] = temp;
+                        temp1 = arr[j + 1];
+                        arr[j] = arr[i + 1];
+                        arr[j + 1] = arr[i];
+                        arr[i] = temp1;
+                        arr[i + 1] = temp;
                     }
                 }
             }
