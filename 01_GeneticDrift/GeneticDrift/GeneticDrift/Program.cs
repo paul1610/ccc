@@ -8,6 +8,7 @@ namespace GeneticDrift
         {
             string input = "8 0 3 1 6 5 -2 4 7";
             int[] inputInt = Array.ConvertAll(input.Split(' '), int.Parse);
+            inputInt = FindOrientedPaars(inputInt);
             Output(inputInt);
         }
 
@@ -20,7 +21,7 @@ namespace GeneticDrift
             }
             for (int i = x.Length; i < yourNumber.Length + x.Length; i++)
             {
-                y[i] = yourNumber[i - x.Length - 1];
+                y[i] = yourNumber[i - x.Length];
             }
             return y;
         }
