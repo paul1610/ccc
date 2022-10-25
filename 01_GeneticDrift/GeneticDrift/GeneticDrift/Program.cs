@@ -26,6 +26,24 @@ namespace GeneticDrift
             return y;
         }
 
+        static int[] Sort(int[] arr)
+        {
+            int temp;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr.Length; j++)
+                {
+                    if (arr[j] <= arr[i])
+                    {
+                        temp = arr[j];
+                        arr[j] = arr[i];
+                        arr[i] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
         static int[] FindOrientedPaars(int[] inputList)
         {
             int[] outputList = new int[0];
