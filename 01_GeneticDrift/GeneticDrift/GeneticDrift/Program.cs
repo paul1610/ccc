@@ -6,9 +6,10 @@ namespace GeneticDrift
     {
         static void Main(string[] args)
         {
-            string input = "8 0 3 1 6 5 -2 4 7";
+            string input = "6 3 1 6 5 -2 4";
             int[] inputInt = Array.ConvertAll(input.Split(' '), int.Parse);
             inputInt = FindOrientedPaars(inputInt);
+            inputInt = Sort(inputInt);
             Output(inputInt);
         }
 
@@ -29,9 +30,9 @@ namespace GeneticDrift
         static int[] Sort(int[] arr)
         {
             int temp;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i += 2)
             {
-                for (int j = 0; j < arr.Length; j++)
+                for (int j = 0; j < arr.Length; j += 2)
                 {
                     if (arr[j] <= arr[i])
                     {
@@ -65,7 +66,7 @@ namespace GeneticDrift
 
         static void Output(int[] output)
         {
-            Console.WriteLine($"Output: {String.Join(", ", output)}");
+            Console.WriteLine($"Output: {output.Length / 2} {String.Join(" ", output)}");
         }
     }
 }
