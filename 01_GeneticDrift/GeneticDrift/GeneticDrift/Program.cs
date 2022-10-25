@@ -22,7 +22,7 @@ namespace GeneticDrift
 
         static void Output(int[] output)
         {
-            Console.WriteLine($"Output: {output}");
+            Console.WriteLine($"Output: {String.Join(",", output)}");
         }
     }
 }
