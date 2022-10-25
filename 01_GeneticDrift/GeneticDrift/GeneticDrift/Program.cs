@@ -8,6 +8,7 @@ namespace GeneticDrift
         {
             string input = "8 0 3 1 6 5 -2 4 7";
             int[] inputInt = Array.ConvertAll(input.Split(' '), int.Parse);
+            Output(inputInt);
         }
 
         static int[] PushToArray(int[] x, int yourNumber)
@@ -23,7 +24,7 @@ namespace GeneticDrift
 
         static void Output(int[] output)
         {
-            Console.WriteLine($"Output: {String.Join(",", output)}");
+            Console.WriteLine($"Output: {String.Join(", ", output)}");
         }
     }
 }
