@@ -9,8 +9,12 @@
             Console.WriteLine("Level 1:");
             Console.WriteLine(test.Level1());
             Console.WriteLine();
-            Console.WriteLine("Level 2:");
-            Console.WriteLine(test.Level2());
+            //Console.WriteLine("Level 2:");
+            //Console.WriteLine(test.Level2());
+            Console.WriteLine();
+            Console.WriteLine("Level 3:");
+            Console.WriteLine(test.Level3());
+            Console.WriteLine();
         }
     }
 }

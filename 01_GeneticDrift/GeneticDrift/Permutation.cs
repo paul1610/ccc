@@ -34,7 +34,7 @@ public class Permutation
 
     public string Level1()
     {
-        List<Pair> pairs = GetPairs();
+        List<Pair> pairs = GetPairs(Numbers);
 
         string output = Convert.ToString(pairs.Count);
 
@@ -51,64 +51,70 @@ public class Permutation
         StringBuilder stringBuilder = new StringBuilder();
         foreach (var number in lvl2Result) stringBuilder.Append($"{number} ");
         return stringBuilder.ToString();
-
-        int[] Inverse(int x, int i, int y, int j)
-        {
-            int start;
-            int end;
-
-            if (x + y == 1)
-            {
-                start = i;
-                end = j - 1;
-            }
-            else
-            {
-                start = i + 1;
-                end = j;
-            }
-
-            int[] inverse = new int[end - start + 1];
-            
-            int count = 0;
-
-            for (int k = end; k >= start; k--)
-            {
-                inverse[count] = Numbers[k] * -1;
-                count++;
-            }
-
-            count = 0;
-
-            for (int k = start; k <= end; k++)
-            {
-                Numbers[k] = inverse[count];
-                count++;
-            }
-            return Numbers.Skip(0).ToArray().SkipLast(6).ToArray();
-        }
     }
-    private List<Pair> GetPairs()
+    public string Level3()
+    {
+        int[] inverse = Inverse(Info[0], Info[1], Info[2], Info[3]);
+        return Convert.ToString(GetPairs(inverse).Count);
+
+    }
+    private int[] Inverse(int x, int i, int y, int j)
+    {
+        int start;
+        int end;
+
+        if (x + y == 1)
+        {
+            start = i;
+            end = j - 1;
+        }
+        else
+        {
+            start = i + 1;
+            end = j;
+        }
+
+        int[] inverse = new int[end - start + 1];
+
+        int count = 0;
+
+        for (int k = end; k >= start; k--)
+        {
+            inverse[count] = Numbers[k] * -1;
+            count++;
+        }
+
+        count = 0;
+
+        for (int k = start; k <= end; k++)
+        {
+            Numbers[k] = inverse[count];
+            count++;
+        }
+        return Numbers.Skip(0).ToArray().SkipLast(6).ToArray();
+    }
+
+    private List<Pair> GetPairs(int[] input)
     {
         int count = 0;
         List<Pair> pairs = new List<Pair>();
 
-        for (int i = 0; i < Numbers.Length; i++)
+        for (int i = 0; i < input.Length; i++)
         {
-            for (int j = i + 1; j < Numbers.Length; j++)
+            for (int j = i + 1; j < input.Length; j++)
             {
-                if (Numbers[i] == 0 && Numbers[j] > 0 || Numbers[i] > 0 && Numbers[j] == 0)
+                if (input[i] == 0 && input[j] > 0 || input[i] > 0 && input[j] == 0)
                 {
                     continue;
                 }
 
-                int value = Numbers[i] * -1 - Numbers[j];
+                int value = input[i] * -1 - input[j];
                 value = Math.Abs(value);
 
                 if (value == 1)
                 {
                     count++;
-                    Pair pair = new Pair(Numbers[i], Numbers[j], i, j);
+                    Pair pair = new Pair(input[i], input[j], i, j);
                     pairs.Add(pair);
                 }
             }
