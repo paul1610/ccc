@@ -110,9 +110,18 @@ public class Permutation
 
     public string Level2()
     {
-        Inverse(Info[0],Info[1],Info[2],Info[3]);
+        Inverse(Info[0], Info[1], Info[2], Info[3]);
 
         return ToString();
+    }
+
+    public int Level3()
+    {
+        Inverse(Info[0], Info[1], Info[2], Info[3]);
+
+        List<Pair> pairs = GetPairs();
+
+        return pairs.Count;
     }
 
     public override string ToString()
