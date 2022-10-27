@@ -1,9 +1,13 @@
+using System.Text;
+using System.Xml.XPath;
+
 namespace GeneticDrift;
 
 public class Permutation
 {
     public int Length { get; }
-    public int[] Numbers { get; }
+    public int[] Numbers { get; private set; }
+    public int[] Info { get; }
 
     public Permutation(string input)
     {
@@ -11,14 +15,21 @@ public class Permutation
 
         Length = Convert.ToInt32(parts[0]);
 
-        int[] numbers = new int[parts.Length - 1];
+        int[] numbers = new int[parts.Length + 1];
 
         for (int i = 1; i < parts.Length; i++)
         {
             numbers[i - 1] = Convert.ToInt32(parts[i]);
         }
+        int[] info = new int[4];
+
+        for (int i = Length + 1; i < parts.Length; i++)
+        {
+            info[i - 1 - Length] = Convert.ToInt32(parts[i]);
+        }
 
         Numbers = numbers;
+        Info = info;
     }
 
     public string Level1()
@@ -36,25 +47,45 @@ public class Permutation
     }
     public string Level2()
     {
-        List<Pair> pairs = GetPairs();
-        string output = "";
-        List<int> result = Numbers.ToList();
-        foreach (var pair in pairs)
+        int [] lvl2Result = Inverse(Info[0], Info[1], Info[2], Info[3]);
+        StringBuilder stringBuilder = new StringBuilder();
+        foreach (var number in lvl2Result) stringBuilder.Append($"{number} ");
+        return stringBuilder.ToString();
+
+        int[] Inverse(int x, int i, int y, int j)
         {
-            if(pair.X + pair.Y == 1)
+            int start;
+            int end;
+
+            if (x + y == 1)
             {
-                InvertList(pair.XIndex, pair.YIndex - 1);
+                start = i;
+                end = j - 1;
             }
-            else if(pair.X + pair.Y == -1)
+            else
             {
-                InvertList(pair.XIndex + 1, pair.YIndex);
+                start = i + 1;
+                end = j;
             }
-        }
-        return output;
-        void InvertList(int from, int to)
-        {
-            int[] valsToInvert = new int[to - from];
+
+            int[] inverse = new int[end - start + 1];
             
+            int count = 0;
+
+            for (int k = end; k >= start; k--)
+            {
+                inverse[count] = Numbers[k] * -1;
+                count++;
+            }
+
+            count = 0;
+
+            for (int k = start; k <= end; k++)
+            {
+                Numbers[k] = inverse[count];
+                count++;
+            }
+            return Numbers.Skip(0).ToArray().SkipLast(6).ToArray();
         }
     }
     private List<Pair> GetPairs()
