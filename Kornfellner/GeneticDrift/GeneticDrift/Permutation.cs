@@ -4,7 +4,6 @@ public class Permutation
 {
     public int Length { get; }
     public int[] Numbers { get; }
-    public int[] Info { get; }
 
     public Permutation(string input)
     {
@@ -19,15 +18,19 @@ public class Permutation
             numbers[i - 1] = Convert.ToInt32(parts[i]);
         }
 
-        int[] info = new int[4];
-
-        for (int i = Length + 1; i < parts.Length; i++)
-        {
-            info[i - 1 - Length] = Convert.ToInt32(parts[i]);
-        }
-
         Numbers = numbers;
-        Info = info;
+    }
+
+    public Permutation(Permutation other)
+    {
+        Length = other.Length;
+
+        Numbers = new int[Length];
+
+        for (int i = 0; i < Length; i++)
+        {
+            Numbers[i] = other.Numbers[i];
+        }
     }
 
     public List<Pair> GetPairs()
@@ -53,27 +56,13 @@ public class Permutation
                 }
             }
         }
+        
+        pairs.Sort();
 
         return pairs;
     }
 
-    public string Level1()
-    {
-        List<Pair> pairs = GetPairs();
-
-        pairs.Sort();
-
-        string output = pairs.Count.ToString();
-
-        foreach (var pair in pairs)
-        {
-            output += $" {pair}";
-        }
-
-        return output;
-    }
-
-    public void Inverse(int x, int i, int y, int j)
+    public Permutation Inverse(int x, int i, int y, int j)
     {
         int start;
         int end;
@@ -101,27 +90,15 @@ public class Permutation
 
         count = 0;
 
+        Permutation other = new Permutation(this);
+
         for (int k = start; k <= end; k++)
         {
-            Numbers[k] = inverse[count];
+            other.Numbers[k] = inverse[count];
             count++;
         }
-    }
 
-    public string Level2()
-    {
-        Inverse(Info[0], Info[1], Info[2], Info[3]);
-
-        return ToString();
-    }
-
-    public int Level3()
-    {
-        Inverse(Info[0], Info[1], Info[2], Info[3]);
-
-        List<Pair> pairs = GetPairs();
-
-        return pairs.Count;
+        return other;
     }
 
     public override string ToString()
