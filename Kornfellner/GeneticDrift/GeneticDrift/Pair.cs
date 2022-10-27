@@ -2,10 +2,10 @@
 {
     public class Pair : IComparable<Pair>
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Entry X { get; }
+        public Entry Y { get; }
 
-        public Pair(int x, int y)
+        public Pair(Entry x, Entry y)
         {
             X = x;
             Y = y;
@@ -23,9 +23,9 @@
                 return 0;
             }
 
-            if (X < other.X)
+            if (X.Value < other.X.Value)
                 return -1;
-            if (X == other.X)
+            if (X.Value == other.X.Value)
                 return 0;
             return 1;
         }
