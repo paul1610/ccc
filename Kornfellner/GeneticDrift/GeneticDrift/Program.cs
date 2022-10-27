@@ -1,4 +1,4 @@
-﻿namespace Test
+﻿namespace GeneticDrift
 {
     internal class Program
     {

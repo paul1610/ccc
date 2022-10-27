@@ -1,4 +1,4 @@
-namespace Test;
+namespace GeneticDrift;
 
 public class Permutation
 {
