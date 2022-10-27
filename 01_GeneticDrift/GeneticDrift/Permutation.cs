@@ -1,4 +1,4 @@
-namespace Test;
+namespace GeneticDrift;
 
 public class Permutation
 {
@@ -23,8 +23,39 @@ public class Permutation
 
     public string Level1()
     {
-        int count = 0;
+        List<Pair> pairs = GetPairs();
 
+        string output = Convert.ToString(pairs.Count);
+
+        foreach (var pair in pairs)
+        {
+            output += $" {pair}";
+        }
+
+        return output;
+    }
+    public string Level2()
+    {
+        List<Pair> pairs = GetPairs();
+        string output = "";
+        int[] invertion = new int[Numbers.Length];
+        Numbers.CopyTo(invertion, 0);
+        foreach (var pair in pairs)
+        {
+            if(pair.X + pair.Y == 1)
+            {
+
+            }
+            else if(pair.X + pair.Y == -1)
+            {
+
+            }
+        }
+        return output;
+    }
+    private List<Pair> GetPairs()
+    {
+        int count = 0;
         List<Pair> pairs = new List<Pair>();
 
         for (int i = 0; i < Numbers.Length; i++)
@@ -47,17 +78,8 @@ public class Permutation
                 }
             }
         }
-
         pairs.Sort();
-
-        string output = count.ToString();
-
-        foreach (var pair in pairs)
-        {
-            output += $" {pair}";
-        }
-
-        return output;
+        return pairs;
     }
 
     public override string ToString()
@@ -66,7 +88,7 @@ public class Permutation
 
         foreach (var number in Numbers)
         {
-            output += $" {number.ToString()}";
+            output += $" {number}";
         }
 
         return output;
