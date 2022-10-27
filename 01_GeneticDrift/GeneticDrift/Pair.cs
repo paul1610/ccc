@@ -4,11 +4,15 @@
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public int XIndex { get; set; }
+        public int YIndex { get; set; }
 
-        public Pair(int x, int y)
+        public Pair(int x, int y, int xIndex, int yIndex)
         {
             X = x;
             Y = y;
+            XIndex = xIndex;
+            YIndex = yIndex;
         }
 
         public override string ToString()

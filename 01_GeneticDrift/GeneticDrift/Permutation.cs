@@ -38,20 +38,24 @@ public class Permutation
     {
         List<Pair> pairs = GetPairs();
         string output = "";
-        int[] invertion = new int[Numbers.Length];
-        Numbers.CopyTo(invertion, 0);
+        List<int> result = Numbers.ToList();
         foreach (var pair in pairs)
         {
             if(pair.X + pair.Y == 1)
             {
-
+                InvertList(pair.XIndex, pair.YIndex - 1);
             }
             else if(pair.X + pair.Y == -1)
             {
-
+                InvertList(pair.XIndex + 1, pair.YIndex);
             }
         }
         return output;
+        void InvertList(int from, int to)
+        {
+            int[] valsToInvert = new int[to - from];
+            
+        }
     }
     private List<Pair> GetPairs()
     {
@@ -73,7 +77,7 @@ public class Permutation
                 if (value == 1)
                 {
                     count++;
-                    Pair pair = new Pair(Numbers[i], Numbers[j]);
+                    Pair pair = new Pair(Numbers[i], Numbers[j], i, j);
                     pairs.Add(pair);
                 }
             }
