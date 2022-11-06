@@ -43,6 +43,15 @@ fn get_throws(input: &str) -> Vec<Throw> {
         throws.push(throw)
     }
 
+    calculate_bonus(&mut throws);
+
+    let throws = &throws[..n];
+    let throws: Vec<Throw> = throws.to_owned();
+
+    throws
+}
+
+fn calculate_bonus(throws: &mut [Throw]) {
     for i in 0..throws.len() - 1 {
         if throws[i].strike {
             throws[i].bonus = throws[i + 1].sum();
@@ -53,11 +62,6 @@ fn get_throws(input: &str) -> Vec<Throw> {
             throws[i].bonus = throws[i + 1].first;
         }
     }
-
-    let throws = &throws[..n];
-    let throws: Vec<Throw> = throws.to_owned();
-
-    throws
 }
 
 #[derive(Debug, Clone)]
