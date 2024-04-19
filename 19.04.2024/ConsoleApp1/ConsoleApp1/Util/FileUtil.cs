@@ -26,7 +26,7 @@ namespace ConsoleApp1.Util
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    string[] values = line.Split(',');
+                    string[] values = line.Split(';');
                     records.Add(values);
                 }
             }
